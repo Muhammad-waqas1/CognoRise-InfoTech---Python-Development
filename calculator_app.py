@@ -24,28 +24,27 @@ class CalculatorApp:
 
         # Creating buttons
         buttons = [
-            ('C', 1, 0), ('(', 1, 1), (')', 1, 2), ('Del', 1, 3),  # First row (moved to top)
+            ('C', 1, 0), ('(', 1, 1), (')', 1, 2), ('Del', 1, 3),
             ('7', 2, 0), ('8', 2, 1), ('9', 2, 2), ('/', 2, 3),
             ('4', 3, 0), ('5', 3, 1), ('6', 3, 2), ('*', 3, 3),
             ('1', 4, 0), ('2', 4, 1), ('3', 4, 2), ('-', 4, 3),
             ('0', 5, 0), ('.', 5, 1), ('=', 5, 2), ('+', 5, 3),
         ]
 
-        # Adding buttons to the GUI with hover effect
+        # Buttons to the GUI
         for (text, row, col) in buttons:
             button = tk.Button(root, text=text, width=5, height=2, font=button_font, bg=button_bg, fg=button_fg,
                                activebackground=button_active_bg, activeforeground='#fff',
                                command=lambda txt=text: self.on_button_click(txt))
             button.grid(row=row, column=col, padx=10, pady=10)
 
-            # Adding hover effect to buttons
+            # Hover effect to buttons
             button.bind("<Enter>", lambda e, b=button: b.config(bg=button_hover_bg))
             button.bind("<Leave>", lambda e, b=button: b.config(bg=button_bg))
 
     def on_button_click(self, char):
         if char == '=':
             try:
-                # Evaluate the expression
                 result = str(eval(self.equation))
                 self.update_display(result)
                 self.equation = result
